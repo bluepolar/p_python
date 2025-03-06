@@ -16,3 +16,10 @@ def portfolio_cost(filename):
     #f.close()
     return total_cost
 
+import sys
+if len(sys.argv) == 2:
+    filename = sys.argv[1]
+else:
+    filename = 'data/portfolio.csv'
+cost = portfolio_cost(filename)
+print('Total cost:', cost)
