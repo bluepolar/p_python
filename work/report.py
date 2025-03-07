@@ -41,7 +41,7 @@ def make_report(portfolio, prices):
     rows = []
     for stock in portfolio:
         current_price = prices[stock['name']]
-        chaneg = current_price - stock['price']
+        change = current_price - stock['price']
         summary =(stock['name'], stock['shares'], current_price, change)
         rows.append(summary)
     return rows
