@@ -9,10 +9,12 @@ def read_portfolio(filename):
         headers = next(rows)
         
         for row in rows:
+            record = dict(zip(headers, row))
+
             stock = {
-                'name'  : row[0],
-                'shares': int(row[1]),
-                'price' : float(row[2])
+                'name'  : record['name'],
+                'shares': int(record['shares']),
+                'price' : float(record['price'])
             }
             
             #holding = (row[0], int(row[1]), float(row[2]))
@@ -47,7 +49,8 @@ def make_report(portfolio, prices):
     return rows
     
         
-portfolio = read_portfolio('data/portfolio.csv')
+#portfolio = read_portfolio('data/portfolio.csv')
+portfolio = read_portfolio('data/portfoliodate.csv')
 prices = read_prices('data/prices.csv')
 
 report = make_report(portfolio, prices)
