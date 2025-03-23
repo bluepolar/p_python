@@ -2,12 +2,12 @@
 
 import csv
 
-def parse_csv(filename, select=None, types=None):
+def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=','):
     '''
     CSV 파일을 파싱해 레코드의 목록을 생성
     '''
     with open(filename) as f:
-        rows = csv.reader(f)
+        rows = csv.reader(f, delimiter=delimiter)
 
         # 헤더를 읽음
         headers = next(rows)
@@ -37,9 +37,15 @@ def parse_csv(filename, select=None, types=None):
             if types:
                 row = [func(val) for func, val in zip(types, row)]
 
+            # 헤더를 대신할 디셔너리나 듀플을 만듦
+            if headers:
+                record = dict(zip(headers, row))
+            else:
+                record = tuple(row)
+                
             # 딕셔너리를 만듦
         
-            record = dict(zip(headers, row))
+
             records.append(record)
 
         return records
